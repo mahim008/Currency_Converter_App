@@ -1,29 +1,40 @@
-from tkinter import *
+from tkinter import * # Import whole module
 
-class CurrencyConverter:
-    def __int__(self):
-        app_window = Tk()   # created application window
-        app_window.title("Currency Converter")  # added title to application window
-        app_window.configure(bg="yellow")   # added background-color
+class CurrencyConverter:  # Create class
+    def __init__(self):  # Special method in Python class
+        window = Tk()  # Create application window
+        window.title("Currency Converter")  # Add title to application window
+        window.configure(bg="yellow")   # Add background color to application window
 
-        # added label widgets to the window
-        Label(app_window, font="Helvetica 12 bold", bg="yellow", text="Amount to Convert").grid(row = 1, column = 1, stricky = W)
-        Label(app_window, font="Helvetica 12 bold", bg="yellow", text="Conversion Rate").grid(row = 2, column = 1, stricky = W)
-        Label(app_window, font="Helvetica 12 bold", bg="yellow", text="Converted Amount").grid(row = 3, column = 1, stricky = W)
+        # Adding Label widgets to application window
+        Label(window,font="Helvetica 12 bold",bg="yellow",text ="USD to convert in BDT").grid(row=1, column=1,sticky =W)
+        Label(window,font="Helvetica 12 bold",bg="yellow",text ="Conversion Rate").grid(row=2, column=1,sticky =W)
+        Label(window,font="Helvetica 12 bold",bg="yellow",text ="Converted Amount").grid(row=3, column=1,sticky =W)
 
-        # created objects and added entry functions
-        self.amount_to_convert_var = StringVar()
-        Entry(app_window, textvariable=self.amount_to_convert_var, justify = RIGHT).grid(row = 1, column = 2)
-        self.conversion_rate_var = StringVar()
-        Entry(app_window, textvariable=self.conversion_rate_var, justify = RIGHT).grid(row = 2, column = 2)
-        self.converted_amount_var = StringVar()
-        lbl_converted_amount = Label(app_window, font="Helvetica 12 bold", bg="yellow", textvariable = self.converted_amount_var).grid(row=3, column=2, stricky = E)
+        # Create objects and add entry functions
+        self.amounttoConvertVar = StringVar()
+        Entry(window, textvariable = self.amounttoConvertVar, justify = RIGHT).grid(row=1,column=2)
+        self.conversionRateVar = StringVar()
+        Entry(window, textvariable = self.conversionRateVar, justify = RIGHT).grid(row=2,column=2)
+        self.convertedAmountVar = StringVar()
+        lblConvertedAmount =Label(window,font="Helvetica 12 bold",bg="yellow", textvariable = self.convertedAmountVar).grid(row=3,column=2,sticky = E)
 
-        # created buttons with respective functions
-        bt_converted_amount = Button(app_window, text = "Convert", font="Helvetica 12 bold", bg="blue", fg="white", command= self.converted_amount).grid(row = 4, column = 2, sticky = E)
-        bt_delete_all = Button(app_window, text = "Clear", font="Helvetica 12 bold", bg="red", fg="white", command= self.delete_all).grid(row = 4, column = 6, padx = 25, pady = 25, sticky = E)
+        # Create convert and clear buttons . When clicked they will call their respective functions.
+        btConvertedAmount = Button(window, text = "Convert",font="Helvetica 12 bold",bg="blue",fg="white",command = self.ConvertedAmount).grid(row = 4,column=2,sticky = E)
+        btdelete_all = Button(window, text = "Clear",font="Helvetica 12 bold",bg="red",fg="white",command = self.delete_all).grid(row = 4,column=6,padx=25,pady=25,sticky = E)
 
-        
+        window.mainloop()  # Runs the application program
 
+        # Function to do the conversion. Stores inputs and performs conversion
+    def ConvertedAmount(self):
+        amt = float(self.conversionRateVar.get())
+        convertedAmountVar =float(self.amounttoConvertVar.get()) * amt
+        self.convertedAmountVar.set(format(convertedAmountVar, '10.2f'))
 
+# Function to clear inputs
+    def delete_all(self):
+        self.amounttoConvertVar.set("")
+        self.conversionRateVar.set("")
+        self.convertedAmountVar.set("")
 
+CurrencyConverter()
