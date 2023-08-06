@@ -19,6 +19,11 @@ class CurrencyConverter:
         self.converted_amount_var = StringVar()
         lbl_converted_amount = Label(app_window, font="Helvetica 12 bold", bg="yellow", textvariable = self.converted_amount_var).grid(row=3, column=2, stricky = E)
 
+        # created buttons with respective functions
+        bt_converted_amount = Button(app_window, text = "Convert", font="Helvetica 12 bold", bg="blue", fg="white", command= self.converted_amount).grid(row = 4, column = 2, sticky = E)
+        bt_delete_all = Button(app_window, text = "Clear", font="Helvetica 12 bold", bg="red", fg="white", command= self.delete_all).grid(row = 4, column = 6, padx = 25, pady = 25, sticky = E)
+
+        
 
 
 
